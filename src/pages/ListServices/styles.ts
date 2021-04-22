@@ -7,6 +7,27 @@ export const Container = styled.div`
 	padding: 40px 20px;
 `;
 
+export const Title = styled.h1`
+	font-size: 48px;
+	color: #181818;
+	max-width: 450px;
+	line-height: 56px;
+
+	margin: 20px 0 40px 0;
+`;
+
+export const Button = styled.button`
+	background-color: #0b5ed7;
+	border: none;
+	color: white;
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+`;
+
 export const TableContainer = styled.section`
 	margin-top: 64px;
 
@@ -15,7 +36,7 @@ export const TableContainer = styled.section`
 		border-spacing: 0 8px;
 
 		th {
-			color: #969cb3;
+			color: #181818;
 			font-weight: normal;
 			padding: 20px 32px;
 			text-align: left;
@@ -29,7 +50,7 @@ export const TableContainer = styled.section`
 			background: #fff;
 			font-size: 16px;
 			font-weight: normal;
-			color: #969cb3;
+			color: #181818;
 		}
 
 		td:first-child {

@@ -4,7 +4,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import api from '../../services/api';
-import { Container, TableContainer } from './styles';
+import { Container, TableContainer, Button, Title } from './styles';
 
 interface Servico {
 	id: string;
@@ -29,8 +29,6 @@ const ListServices: React.FC = () => {
 		loadServicos();
 	}, []);
 
-	// const handleUpdate = useCallback(() => {}, []);
-
 	const handleDelete = useCallback(async id => {
 		await api.delete(`/servicos/${id}`);
 	}, []);
@@ -38,11 +36,7 @@ const ListServices: React.FC = () => {
 	return (
 		<>
 			<Container>
-				<h1>Tela de listagem</h1>
-				<p>haha</p>
-				<Link to="/cadastro">
-					<button type="button">Add new service</button>
-				</Link>
+				<Title>Lista dos serviços</Title>
 
 				<TableContainer>
 					<table>
@@ -65,10 +59,10 @@ const ListServices: React.FC = () => {
 									<td>{servico.telefone}</td>
 									<td>
 										<Link to={`/cadastro/${servico.id}`}>
-											<FiEdit />
+											<FiEdit size={20} />
 										</Link>
 										<a href="/" onClick={() => handleDelete(servico.id)}>
-											<FiTrash2 />
+											<FiTrash2 size={20} />
 										</a>
 									</td>
 								</tr>
@@ -76,6 +70,10 @@ const ListServices: React.FC = () => {
 						</tbody>
 					</table>
 				</TableContainer>
+
+				<Link to="/cadastro">
+					<Button type="button">Novo Serviço</Button>
+				</Link>
 			</Container>
 		</>
 	);

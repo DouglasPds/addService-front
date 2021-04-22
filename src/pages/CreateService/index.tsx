@@ -6,18 +6,18 @@ import { Link, useHistory, useParams } from 'react-router-dom';
 
 import Dropzone from '../../components/Dropzone';
 import Input from '../../components/Input';
-import ReactSelect from '../../components/Select';
+import AsyncSelect from '../../components/Select';
 import TextArea from '../../components/TextArea';
 import tipoServico from '../../enum/tipoServico';
 import api from '../../services/api';
-import { Container } from './styles';
+import { Container, Button, Title, Label } from './styles';
 
 interface Servico {
 	titulo: string;
 	descricao: string;
 	tipo_servico: string;
-	fotos: File[];
-	telefone: string;
+	fotos?: string;
+	telefone?: string;
 }
 
 interface Id {
@@ -27,31 +27,51 @@ interface Id {
 const CreateService: React.FC = () => {
 	const history = useHistory();
 	const { id } = useParams<Id>();
-	const [servico, setServico] = useState<Servico>();
+	const [servico, setServico] = useState<Servico>(() => {
+		async function loadServico(): Promise<Servico | undefined> {
+			if (id) {
+				console.log(id);
+				const response = await api.get(`/servicos/${id}`);
+				// setServico(response.data);
+				console.log(response.data);
+				return response.data;
+				console.log(response.data.fotos);
+				console.log(servico);
+			}
+		}
+		loadServico();
+		return {} as Servico;
+	});
 	const formRef = useRef<FormHandles>(null);
 
 	useEffect(() => {
 		async function loadServico(): Promise<void> {
 			if (id) {
+				console.log(id);
 				const response = await api.get(`/servicos/${id}`);
-				const servicoa = response.data;
-				setServico(servicoa);
+				setServico(response.data);
 				console.log(response.data);
+				console.log(response.data.fotos);
+				// console.log(servico);
 			}
 		}
 		loadServico();
-		console.log(id);
 	}, [id]);
 
 	useEffect(() => {
+		// const {  } = servico;
 		formRef.current?.setData({
 			titulo: servico?.titulo,
 			descricao: servico?.descricao,
-			// tipo_servico: servico?.tipo_servico,
-			// fotos: servico?.fotos[0].name,
+			tipo_servico: {
+				value: servico?.tipo_servico,
+				label: servico?.tipo_servico,
+			},
+			// fotos: servico?.fotos,
 			telefone: servico?.telefone,
 		});
-		formRef.current?.setFieldValue('tipo_servico', servico?.tipo_servico);
+		console.log(servico);
+		// setTimeout(() => console.log(servico?.fotos), 2000);
 	}, [servico]);
 
 	const handleSubmit = useCallback(
@@ -80,32 +100,41 @@ const CreateService: React.FC = () => {
 				}
 
 				history.push('/');
-				console.log('pós post');
-				// console.log(response.data);
 
 				reset();
 			} catch (err) {
 				console.log(err, 'Erro ao salvar');
 			}
 		},
-		[history],
+		[history, id],
 	);
 
 	return (
 		<>
 			<Container>
-				<h1>Criar Serviço</h1>
-				<Form ref={formRef} onSubmit={handleSubmit}>
-					<Input name="titulo" />
-					<TextArea name="descricao" />
-					<ReactSelect name="tipo_servico" options={tipoServico} isClearable />
-					<Input name="telefone" />
+				<Title>Criar Serviço</Title>
+				<Form id="form" ref={formRef} onSubmit={handleSubmit}>
+					<Label htmlFor="titulo">Título</Label>
+					<Input name="titulo" id="titulo" placeholder="Título" />
+					<Label>Descrição</Label>
+					<TextArea name="descricao" placeholder="Descrição" />
+					<Label>Tipo Serviço</Label>
+					<AsyncSelect
+						name="tipo_servico"
+						options={tipoServico}
+						placeholder="Selecione..."
+						isClearable
+					/>
+					<Label>Telefone</Label>
+					<Input name="telefone" placeholder="Telefone" />
 					{/* <Dropzone name="fotos" /> */}
-					<button type="submit">Adicionar</button>
+					<div>
+						<Button type="submit">Adicionar</Button>
+						<Link to="/">
+							<Button type="button">Voltar</Button>
+						</Link>
+					</div>
 				</Form>
-				<Link to="/">
-					<button type="button">Voltar</button>
-				</Link>
 			</Container>
 		</>
 	);

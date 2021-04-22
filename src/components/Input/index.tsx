@@ -23,7 +23,6 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
 	return (
 		<>
 			<Container>
-				<h1>{name}</h1>
 				<input ref={inputRef} {...rest} />
 			</Container>
 		</>

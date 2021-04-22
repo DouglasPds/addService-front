@@ -15,18 +15,7 @@ const Select: React.FC<SelectProps> = ({ name, ...rest }) => {
 		registerField({
 			name: fieldName,
 			ref: selectRef.current,
-			getValue: (ref: any) => {
-				if (rest.isMulti) {
-					if (!ref.state.value) {
-						return [];
-					}
-					return ref.state.value.map((option: OptionTypeBase) => option.value);
-				}
-				if (!ref.state.value) {
-					return '';
-				}
-				return ref.state.value.value;
-			},
+			path: 'state.value',
 		});
 	}, [fieldName, registerField, rest.isMulti]);
 
