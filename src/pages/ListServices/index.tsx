@@ -21,10 +21,8 @@ const ListServices: React.FC = () => {
 	useEffect(() => {
 		async function loadServicos(): Promise<void> {
 			const response = await api.get('/servicos');
-			const ListaServicos = response.data;
 
-			setServicos(ListaServicos);
-			console.log(response.data);
+			setServicos(response.data);
 		}
 		loadServicos();
 	}, []);

@@ -4,7 +4,6 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import Dropzone from '../../components/Dropzone';
 import Input from '../../components/Input';
 import AsyncSelect from '../../components/Select';
 import TextArea from '../../components/TextArea';
@@ -27,39 +26,20 @@ interface Id {
 const CreateService: React.FC = () => {
 	const history = useHistory();
 	const { id } = useParams<Id>();
-	const [servico, setServico] = useState<Servico>(() => {
-		async function loadServico(): Promise<Servico | undefined> {
-			if (id) {
-				console.log(id);
-				const response = await api.get(`/servicos/${id}`);
-				// setServico(response.data);
-				console.log(response.data);
-				return response.data;
-				console.log(response.data.fotos);
-				console.log(servico);
-			}
-		}
-		loadServico();
-		return {} as Servico;
-	});
+	const [servico, setServico] = useState<Servico>();
 	const formRef = useRef<FormHandles>(null);
 
 	useEffect(() => {
 		async function loadServico(): Promise<void> {
 			if (id) {
-				console.log(id);
 				const response = await api.get(`/servicos/${id}`);
 				setServico(response.data);
-				console.log(response.data);
-				console.log(response.data.fotos);
-				// console.log(servico);
 			}
 		}
 		loadServico();
 	}, [id]);
 
 	useEffect(() => {
-		// const {  } = servico;
 		formRef.current?.setData({
 			titulo: servico?.titulo,
 			descricao: servico?.descricao,
@@ -67,20 +47,14 @@ const CreateService: React.FC = () => {
 				value: servico?.tipo_servico,
 				label: servico?.tipo_servico,
 			},
-			// fotos: servico?.fotos,
 			telefone: servico?.telefone,
 		});
-		console.log(servico);
-		// setTimeout(() => console.log(servico?.fotos), 2000);
 	}, [servico]);
 
 	const handleSubmit = useCallback(
 		async (data: Servico, { reset }) => {
 			try {
-				console.log('haha', data, data.titulo);
-				// console.log(data.fotos[0]?.name);
-
-				const { titulo, descricao, tipo_servico, fotos, telefone } = data;
+				const { titulo, descricao, tipo_servico, telefone } = data;
 
 				if (id) {
 					await api.put(`/servicos/${id}`, {
@@ -94,7 +68,6 @@ const CreateService: React.FC = () => {
 						titulo,
 						descricao,
 						tipo_servico,
-						// fotos: fotos[0]?.name,
 						telefone,
 					});
 				}
@@ -127,7 +100,6 @@ const CreateService: React.FC = () => {
 					/>
 					<Label>Telefone</Label>
 					<Input name="telefone" placeholder="Telefone" />
-					{/* <Dropzone name="fotos" /> */}
 					<div>
 						<Button type="submit">Adicionar</Button>
 						<Link to="/">
