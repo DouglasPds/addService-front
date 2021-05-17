@@ -1,0 +1,24 @@
+{
+  "servicos": [
+    {
+      "titulo": "Monta pc da nasa",
+      "descricao": "Todo tipo de peças",
+      "tipo_servico": {
+        "value": "Informática",
+        "label": "Informática"
+      },
+      "telefone": "75839764938",
+      "id": "EQFaawh"
+    },
+    {
+      "titulo": "Sobe parede top top memo",
+      "descricao": "confia",
+      "tipo_servico": {
+        "value": "Reparação/Conserto/Reforma",
+        "label": "Reparação/Conserto/Reforma"
+      },
+      "telefone": "3241233442",
+      "id": "JjeGTrH"
+    }
+  ]
+}

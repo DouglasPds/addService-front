@@ -14,7 +14,10 @@ import { Container, Button, Title, Label } from './styles';
 interface Servico {
 	titulo: string;
 	descricao: string;
-	tipo_servico: string;
+	tipo_servico: {
+		value: string;
+		label: string;
+	};
 	fotos?: string;
 	telefone?: string;
 }
@@ -44,8 +47,8 @@ const CreateService: React.FC = () => {
 			titulo: servico?.titulo,
 			descricao: servico?.descricao,
 			tipo_servico: {
-				value: servico?.tipo_servico,
-				label: servico?.tipo_servico,
+				value: servico?.tipo_servico.value,
+				label: servico?.tipo_servico.label,
 			},
 			telefone: servico?.telefone,
 		});

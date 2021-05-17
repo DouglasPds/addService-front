@@ -10,7 +10,10 @@ interface Servico {
 	id: string;
 	titulo: string;
 	descricao: string;
-	tipo_servico: string;
+	tipo_servico: {
+		value: string;
+		label: string;
+	};
 	fotos: string;
 	telefone: string;
 }
@@ -21,7 +24,7 @@ const ListServices: React.FC = () => {
 	useEffect(() => {
 		async function loadServicos(): Promise<void> {
 			const response = await api.get('/servicos');
-
+			console.log(response.data);
 			setServicos(response.data);
 		}
 		loadServicos();
@@ -53,7 +56,7 @@ const ListServices: React.FC = () => {
 								<tr key={servico.id}>
 									<td>{servico.titulo}</td>
 									<td>{servico.descricao}</td>
-									<td>{servico.tipo_servico}</td>
+									<td>{servico.tipo_servico.value}</td>
 									<td>{servico.telefone}</td>
 									<td>
 										<Link to={`/cadastro/${servico.id}`}>
