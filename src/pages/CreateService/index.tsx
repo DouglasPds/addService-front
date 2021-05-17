@@ -4,11 +4,13 @@ import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useHistory, useParams } from 'react-router-dom';
 
-import Input from '../../components/Input';
-import AsyncSelect from '../../components/Select';
-import TextArea from '../../components/TextArea';
-import tipoServico from '../../enum/tipoServico';
-import api from '../../services/api';
+import Header from 'components/Header';
+import Input from 'components/Input';
+import AsyncSelect from 'components/Select';
+import TextArea from 'components/TextArea';
+import tipoServico from 'enum/tipoServico';
+import api from 'services/api';
+
 import { Container, Button, Title, Label } from './styles';
 
 interface Servico {
@@ -87,6 +89,7 @@ const CreateService: React.FC = () => {
 
 	return (
 		<>
+			<Header />
 			<Container>
 				<Title>Criar Serviço</Title>
 				<Form id="form" ref={formRef} onSubmit={handleSubmit}>

@@ -3,7 +3,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-import api from '../../services/api';
+import Header from 'components/Header';
+import api from 'services/api';
+
 import { Container, TableContainer, Button, Title } from './styles';
 
 interface Servico {
@@ -24,7 +26,6 @@ const ListServices: React.FC = () => {
 	useEffect(() => {
 		async function loadServicos(): Promise<void> {
 			const response = await api.get('/servicos');
-			console.log(response.data);
 			setServicos(response.data);
 		}
 		loadServicos();
@@ -36,6 +37,7 @@ const ListServices: React.FC = () => {
 
 	return (
 		<>
+			<Header />
 			<Container>
 				<Title>Lista dos serviços</Title>
 
