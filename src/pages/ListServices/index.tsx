@@ -5,20 +5,9 @@ import { Link } from 'react-router-dom';
 
 import Header from 'components/Header';
 import { useServices } from 'hooks/useServices';
+import { Servico } from 'interfaces/services.interface';
 
 import { Container, TableContainer, Button, Title } from './styles';
-
-interface Servico {
-	id: string;
-	titulo: string;
-	descricao: string;
-	tipo_servico: {
-		value: string;
-		label: string;
-	};
-	fotos: string;
-	telefone: string;
-}
 
 const ListServices: React.FC = () => {
 	const { fetchServices, services, handleDelete } = useServices();

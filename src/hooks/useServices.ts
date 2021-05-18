@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
 
+import { Servico } from 'interfaces/services.interface';
 import {
 	requestServices,
 	requestService,
@@ -12,18 +12,19 @@ import {
 } from 'store/services/actions';
 import { listServices, listService } from 'store/services/selectors';
 
-interface Servico {
-	titulo: string;
-	descricao: string;
-	tipo_servico: {
-		value: string;
-		label: string;
-	};
-	fotos?: string;
-	telefone?: string;
+interface UseServicesProps {
+	services: Servico[];
+	service: Servico;
+	loading: boolean;
+	error: boolean;
+	fetchServices(): void;
+	fetchService(id: string): void;
+	handleDelete(id: string): void;
+	addService(value: Servico): void;
+	handleUpdate(id: string, value: Servico): void;
 }
 
-export const useServices = () => {
+export const useServices = (): UseServicesProps => {
 	const { data, loading, error } = useSelector(listServices);
 	const { state } = useSelector(listService);
 

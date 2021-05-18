@@ -7,6 +7,8 @@ export const Container = styled.div`
 	padding: 40px 20px;
 
 	form {
+		background: white;
+		padding: 10px;
 		display: flex;
 		flex-direction: column;
 

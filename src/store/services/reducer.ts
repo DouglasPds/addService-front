@@ -1,16 +1,6 @@
-import types from './types';
+import { Servico } from 'interfaces/services.interface';
 
-interface Servico {
-	id: string;
-	titulo: string;
-	descricao: string;
-	tipo_servico: {
-		value: string;
-		label: string;
-	};
-	fotos: string;
-	telefone: string;
-}
+import types from './types';
 
 interface InitialState {
 	data: Servico[];
@@ -71,7 +61,18 @@ export function services(
 	}
 }
 
-export function service(state = [], action: { type: string; payload: any }) {
+interface Initial {
+	state: Servico[];
+}
+
+const initial: Initial = {
+	state: [],
+};
+
+export function service(
+	state = initial,
+	action: { type: string; payload: any },
+): Initial {
 	switch (action.type) {
 		case types.REQUEST_SERVICE_SUCCESS:
 			return { state: action.payload };

@@ -1,23 +1,28 @@
+import { Servico } from 'interfaces/services.interface';
+
 import api from './api';
 
-export const getServices = async () => {
+export const getServices = async (): Promise<Servico[]> => {
 	const response = await api.get('servicos');
 	return response.data;
 };
 
-export const getService = async (id: string) => {
+export const getService = async (id: string): Promise<Servico> => {
 	const response = await api.get(`servicos/${id}`);
 	return response.data;
 };
 
-export const deleteService = async (id: string) => {
+export const deleteService = async (id: string): Promise<void> => {
 	await api.delete(`servicos/${id}`);
 };
 
-export const createService = async (data: any) => {
+export const createService = async (data: Servico): Promise<void> => {
 	await api.post('servicos', data);
 };
 
-export const updateService = async (id: string, data: any) => {
+export const updateService = async (
+	id: string,
+	data: Servico,
+): Promise<void> => {
 	await api.put(`servicos/${id}`, data);
 };

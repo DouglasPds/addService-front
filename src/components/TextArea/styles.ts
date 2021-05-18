@@ -5,7 +5,7 @@ export const Textarea = styled.textarea`
 	height: 130px;
 	padding: 16px;
 	margin-bottom: 20px;
-	border: 0;
+	border: 1px solid rgba(0, 0, 0, 0.2);
 	border-radius: 5px;
 	background-color: #fff;
 	color: #181818;

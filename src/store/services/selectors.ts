@@ -1,14 +1,22 @@
-interface Servico {
-	titulo: string;
-	descricao: string;
-	tipo_servico: {
-		value: string;
-		label: string;
-	};
-	fotos?: string;
-	telefone?: string;
+import { Servico } from 'interfaces/services.interface';
+
+interface ServiceProps {
+	data: Servico[];
+	loading: boolean;
+	error: boolean;
 }
 
-export const listServices = (state: any) => state.services;
+interface StateProps {
+	services: ServiceProps;
+}
 
-export const listService = (state: any) => state.service;
+interface State {
+	state: Servico;
+}
+interface StateData {
+	service: State;
+}
+
+export const listServices = (state: StateProps): ServiceProps => state.services;
+
+export const listService = (state: StateData): State => state.service;

@@ -10,19 +10,9 @@ import AsyncSelect from 'components/Select';
 import TextArea from 'components/TextArea';
 import tipoServico from 'enum/tipoServico';
 import { useServices } from 'hooks/useServices';
+import { Servico } from 'interfaces/services.interface';
 
 import { Container, Button, Title, Label } from './styles';
-
-interface Servico {
-	titulo: string;
-	descricao: string;
-	tipo_servico: {
-		value: string;
-		label: string;
-	};
-	fotos?: string;
-	telefone?: string;
-}
 
 interface Id {
 	id: string;
