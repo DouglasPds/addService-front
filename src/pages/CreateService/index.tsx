@@ -10,7 +10,6 @@ import AsyncSelect from 'components/Select';
 import TextArea from 'components/TextArea';
 import tipoServico from 'enum/tipoServico';
 import { useServices } from 'hooks/useServices';
-import api from 'services/api';
 
 import { Container, Button, Title, Label } from './styles';
 
@@ -34,25 +33,27 @@ const CreateService: React.FC = () => {
 	const { id } = useParams<Id>();
 	const [servico, setServico] = useState<Servico>();
 	const formRef = useRef<FormHandles>(null);
-	const { addService, handleUpdate } = useServices();
+	const { addService, handleUpdate, fetchService, service } = useServices();
 
 	useEffect(() => {
-		async function loadServico(): Promise<void> {
-			if (id) {
-				const response = await api.get(`/servicos/${id}`);
-				setServico(response.data);
-			}
+		if (id) {
+			fetchService(id);
 		}
-		loadServico();
-	}, [id]);
+	}, [fetchService, id]);
+
+	useEffect(() => {
+		if (id) {
+			setServico(service);
+		}
+	}, [id, service]);
 
 	useEffect(() => {
 		formRef.current?.setData({
 			titulo: servico?.titulo,
 			descricao: servico?.descricao,
 			tipo_servico: {
-				value: servico?.tipo_servico.value,
-				label: servico?.tipo_servico.label,
+				value: servico?.tipo_servico?.value,
+				label: servico?.tipo_servico?.label,
 			},
 			telefone: servico?.telefone,
 		});
@@ -70,37 +71,6 @@ const CreateService: React.FC = () => {
 		},
 		[addService, history, handleUpdate, id],
 	);
-
-	// const handleSubmit = useCallback(
-	// 	async (data: Servico, { reset }) => {
-	// 		try {
-	// 			const { titulo, descricao, tipo_servico, telefone } = data;
-
-	// 			if (id) {
-	// 				await api.put(`/servicos/${id}`, {
-	// 					titulo,
-	// 					descricao,
-	// 					tipo_servico,
-	// 					telefone,
-	// 				});
-	// 			} else {
-	// 				await api.post('/servicos', {
-	// 					titulo,
-	// 					descricao,
-	// 					tipo_servico,
-	// 					telefone,
-	// 				});
-	// 			}
-
-	// 			history.push('/');
-
-	// 			reset();
-	// 		} catch (err) {
-	// 			console.log(err, 'Erro ao salvar');
-	// 		}
-	// 	},
-	// 	[history, id],
-	// );
 
 	return (
 		<>

@@ -6,6 +6,13 @@ export function requestServices() {
 	};
 }
 
+export function requestService(id: string) {
+	return {
+		type: types.REQUEST_SERVICE,
+		id,
+	};
+}
+
 export function deleteService(id: string) {
 	return {
 		type: types.DELETE_SERVICE,

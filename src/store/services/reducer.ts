@@ -70,3 +70,13 @@ export function services(
 			return state;
 	}
 }
+
+export function service(state = [], action: { type: string; payload: any }) {
+	switch (action.type) {
+		case types.REQUEST_SERVICE_SUCCESS:
+			return { state: action.payload };
+
+		default:
+			return state;
+	}
+}
