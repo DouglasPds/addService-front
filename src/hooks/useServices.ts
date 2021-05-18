@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useSelector, useDispatch } from 'react-redux';
 
-import { requestServices } from 'store/services/actions';
+import { requestServices, deleteService } from 'store/services/actions';
 import { listServices } from 'store/services/selectors';
 
 export const useServices = () => {
@@ -13,10 +13,18 @@ export const useServices = () => {
 		dispatch(requestServices());
 	}, [dispatch]);
 
+	const handleDelete = useCallback(
+		id => {
+			dispatch(deleteService(id));
+		},
+		[dispatch],
+	);
+
 	return {
 		services: data,
 		loading,
 		error,
 		fetchServices,
+		handleDelete,
 	};
 };

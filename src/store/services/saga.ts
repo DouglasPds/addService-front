@@ -1,6 +1,6 @@
 import { all, takeEvery, put } from 'redux-saga/effects';
 
-import { getServices } from 'services/services';
+import { getServices, deleteService } from 'services/services';
 
 import types from './types';
 
@@ -16,6 +16,18 @@ function* requestServices(): any {
 	}
 }
 
+function* handleDelete(value: any) {
+	const { id } = value;
+	yield deleteService(id);
+	yield put({
+		type: types.DELETE_SERVICE,
+		payload: id,
+	});
+}
+
 export default function* rootSaga() {
-	yield all([takeEvery(types.REQUEST_SERVICES, requestServices)]);
+	yield all([
+		takeEvery(types.REQUEST_SERVICES, requestServices),
+		takeEvery(types.DELETE_SERVICE, handleDelete),
+	]);
 }

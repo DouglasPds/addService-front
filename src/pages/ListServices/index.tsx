@@ -22,15 +22,11 @@ interface Servico {
 }
 
 const ListServices: React.FC = () => {
-	const { fetchServices, services } = useServices();
+	const { fetchServices, services, handleDelete } = useServices();
 
 	useEffect(() => {
 		fetchServices();
 	}, [fetchServices]);
-
-	const handleDelete = useCallback(async id => {
-		await api.delete(`/servicos/${id}`);
-	}, []);
 
 	return (
 		<>
