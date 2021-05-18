@@ -2,8 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
 	background: white;
-	height: 400px;
-	margin: 50px auto 0;
+	margin: 70px auto 0;
 	max-width: 30rem;
 	padding: 20px;
 
@@ -18,5 +17,20 @@ export const Container = styled.div`
 	form {
 		display: flex;
 		flex-direction: column;
+
+		label {
+			margin-bottom: 15px;
+		}
+
+		button {
+			border: none;
+			background: #157347;
+			color: white;
+			padding: 12px 24px;
+			text-align: center;
+			text-decoration: none;
+			font-size: 16px;
+			border-radius: 5px;
+		}
 	}
 `;

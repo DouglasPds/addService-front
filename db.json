@@ -30,5 +30,19 @@
       "telefone": "a",
       "id": "sYDaIzh"
     }
+  ],
+  "users": [
+    {
+      "nome": "aa",
+      "e-mail": "aa",
+      "senha": "aa",
+      "id": 1
+    },
+    {
+      "nome": "Douglas",
+      "e-mail": "douglas@email.com",
+      "senha": "naruto",
+      "id": 2
+    }
   ]
 }
