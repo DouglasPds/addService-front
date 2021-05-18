@@ -7,9 +7,15 @@ export function requestServices() {
 }
 
 export function deleteService(id: string) {
-	console.log(id);
 	return {
 		type: types.DELETE_SERVICE,
 		id,
+	};
+}
+
+export function createService(data: any) {
+	return {
+		type: types.CREATE_SERVICE,
+		data,
 	};
 }

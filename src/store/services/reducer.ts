@@ -45,6 +45,12 @@ export function services(
 				data: state.data.filter(id => id !== action.payload),
 			};
 
+		case types.CREATE_SERVICE_SUCCESS:
+			return {
+				...state,
+				data: [...state.data, action.payload],
+			};
+
 		default:
 			return state;
 	}

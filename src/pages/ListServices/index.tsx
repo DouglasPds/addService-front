@@ -1,11 +1,10 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useEffect } from 'react';
 
 import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import Header from 'components/Header';
 import { useServices } from 'hooks/useServices';
-import api from 'services/api';
 
 import { Container, TableContainer, Button, Title } from './styles';
 

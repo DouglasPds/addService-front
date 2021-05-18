@@ -9,6 +9,7 @@ import Input from 'components/Input';
 import AsyncSelect from 'components/Select';
 import TextArea from 'components/TextArea';
 import tipoServico from 'enum/tipoServico';
+import { useServices } from 'hooks/useServices';
 import api from 'services/api';
 
 import { Container, Button, Title, Label } from './styles';
@@ -33,6 +34,7 @@ const CreateService: React.FC = () => {
 	const { id } = useParams<Id>();
 	const [servico, setServico] = useState<Servico>();
 	const formRef = useRef<FormHandles>(null);
+	const { addService } = useServices();
 
 	useEffect(() => {
 		async function loadServico(): Promise<void> {
@@ -57,35 +59,44 @@ const CreateService: React.FC = () => {
 	}, [servico]);
 
 	const handleSubmit = useCallback(
-		async (data: Servico, { reset }) => {
-			try {
-				const { titulo, descricao, tipo_servico, telefone } = data;
-
-				if (id) {
-					await api.put(`/servicos/${id}`, {
-						titulo,
-						descricao,
-						tipo_servico,
-						telefone,
-					});
-				} else {
-					await api.post('/servicos', {
-						titulo,
-						descricao,
-						tipo_servico,
-						telefone,
-					});
-				}
-
-				history.push('/');
-
-				reset();
-			} catch (err) {
-				console.log(err, 'Erro ao salvar');
-			}
+		(data: Servico, { reset }) => {
+			addService(data);
+			history.push('/');
+			reset();
 		},
-		[history, id],
+		[addService, history],
 	);
+
+	// const handleSubmit = useCallback(
+	// 	async (data: Servico, { reset }) => {
+	// 		try {
+	// 			const { titulo, descricao, tipo_servico, telefone } = data;
+
+	// 			if (id) {
+	// 				await api.put(`/servicos/${id}`, {
+	// 					titulo,
+	// 					descricao,
+	// 					tipo_servico,
+	// 					telefone,
+	// 				});
+	// 			} else {
+	// 				await api.post('/servicos', {
+	// 					titulo,
+	// 					descricao,
+	// 					tipo_servico,
+	// 					telefone,
+	// 				});
+	// 			}
+
+	// 			history.push('/');
+
+	// 			reset();
+	// 		} catch (err) {
+	// 			console.log(err, 'Erro ao salvar');
+	// 		}
+	// 	},
+	// 	[history, id],
+	// );
 
 	return (
 		<>

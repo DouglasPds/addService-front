@@ -8,3 +8,7 @@ export const getServices = async () => {
 export const deleteService = async (id: string) => {
 	await api.delete(`servicos/${id}`);
 };
+
+export const createService = async (data: any) => {
+	await api.post('servicos', data);
+};
