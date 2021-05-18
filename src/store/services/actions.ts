@@ -19,3 +19,11 @@ export function createService(data: any) {
 		data,
 	};
 }
+
+export function updateService(id: string, data: any) {
+	return {
+		type: types.UPDATE_SERVICE,
+		id,
+		data,
+	};
+}

@@ -50,10 +50,10 @@ const ListServices: React.FC = () => {
 								<tr key={service.id}>
 									<td>{service.titulo}</td>
 									<td>{service.descricao}</td>
-									<td>{service.tipo_servico.value}</td>
+									<td>{service.tipo_servico?.value}</td>
 									<td>{service.telefone}</td>
 									<td>
-										<Link to={`/cadastro/${service.id}`}>
+										<Link to={`/servico/${service.id}`}>
 											<FiEdit size={20} />
 										</Link>
 										<a href="/" onClick={() => handleDelete(service.id)}>
@@ -66,7 +66,7 @@ const ListServices: React.FC = () => {
 					</table>
 				</TableContainer>
 
-				<Link to="/cadastro">
+				<Link to="/servico">
 					<Button type="button">Novo Serviço</Button>
 				</Link>
 			</Container>

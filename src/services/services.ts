@@ -12,3 +12,7 @@ export const deleteService = async (id: string) => {
 export const createService = async (data: any) => {
 	await api.post('servicos', data);
 };
+
+export const updateService = async (id: string, data: any) => {
+	await api.put(`servicos/${id}`, data);
+};

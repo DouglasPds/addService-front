@@ -34,7 +34,7 @@ const CreateService: React.FC = () => {
 	const { id } = useParams<Id>();
 	const [servico, setServico] = useState<Servico>();
 	const formRef = useRef<FormHandles>(null);
-	const { addService } = useServices();
+	const { addService, handleUpdate } = useServices();
 
 	useEffect(() => {
 		async function loadServico(): Promise<void> {
@@ -60,11 +60,15 @@ const CreateService: React.FC = () => {
 
 	const handleSubmit = useCallback(
 		(data: Servico, { reset }) => {
-			addService(data);
+			if (id) {
+				handleUpdate(id, data);
+			} else {
+				addService(data);
+			}
 			history.push('/');
 			reset();
 		},
-		[addService, history],
+		[addService, history, handleUpdate, id],
 	);
 
 	// const handleSubmit = useCallback(

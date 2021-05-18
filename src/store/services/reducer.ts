@@ -27,7 +27,7 @@ const INITIAL_STATE: InitialState = {
 export function services(
 	state = INITIAL_STATE,
 	action: { type: string; payload: any },
-): InitialState {
+) {
 	switch (action.type) {
 		case types.REQUEST_SERVICES:
 			return { ...state, loading: true };
@@ -49,6 +49,21 @@ export function services(
 			return {
 				...state,
 				data: [...state.data, action.payload],
+			};
+
+		case types.UPDATE_SERVICE_SUCCESS:
+			return {
+				...state,
+				data: [
+					state.data.map(servico => {
+						if (servico.id === action.payload.id) {
+							return {
+								...action.payload.data,
+							};
+						}
+						return servico;
+					}),
+				],
 			};
 
 		default:

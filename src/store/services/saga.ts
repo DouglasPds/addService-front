@@ -1,6 +1,11 @@
-import { all, takeEvery, put, takeLatest } from 'redux-saga/effects';
+import { all, takeEvery, put } from 'redux-saga/effects';
 
-import { getServices, deleteService, createService } from 'services/services';
+import {
+	getServices,
+	deleteService,
+	createService,
+	updateService,
+} from 'services/services';
 
 import types from './types';
 
@@ -34,10 +39,23 @@ function* addService(value: any) {
 	});
 }
 
+function* handleUpdate(value: any) {
+	const { id, data } = value;
+	yield updateService(id, data);
+	yield put({
+		type: types.UPDATE_SERVICE_SUCCESS,
+		payload: {
+			id,
+			data,
+		},
+	});
+}
+
 export default function* rootSaga() {
 	yield all([
 		takeEvery(types.REQUEST_SERVICES, requestServices),
 		takeEvery(types.DELETE_SERVICE, handleDelete),
 		takeEvery(types.CREATE_SERVICE, addService),
+		takeEvery(types.UPDATE_SERVICE, handleUpdate),
 	]);
 }

@@ -8,8 +8,8 @@ import ListServices from 'pages/ListServices';
 const Routes: React.FC = () => (
 	<Switch>
 		<Route path="/" exact component={ListServices} />
-		<Route path="/cadastro/:id" component={CreateService} />
-		<Route path="/cadastro" component={CreateService} />
+		<Route path="/servico/:id" component={CreateService} />
+		<Route path="/servico" component={CreateService} />
 	</Switch>
 );
 
