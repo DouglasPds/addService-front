@@ -4,6 +4,7 @@ import { FiEdit, FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
 import Header from 'components/Header';
+import { useServices } from 'hooks/useServices';
 import api from 'services/api';
 
 import { Container, TableContainer, Button, Title } from './styles';
@@ -21,15 +22,11 @@ interface Servico {
 }
 
 const ListServices: React.FC = () => {
-	const [servicos, setServicos] = useState<Servico[]>([]);
+	const { fetchServices, services } = useServices();
 
 	useEffect(() => {
-		async function loadServicos(): Promise<void> {
-			const response = await api.get('/servicos');
-			setServicos(response.data);
-		}
-		loadServicos();
-	}, []);
+		fetchServices();
+	}, [fetchServices]);
 
 	const handleDelete = useCallback(async id => {
 		await api.delete(`/servicos/${id}`);
@@ -54,17 +51,17 @@ const ListServices: React.FC = () => {
 						</thead>
 
 						<tbody>
-							{servicos.map(servico => (
-								<tr key={servico.id}>
-									<td>{servico.titulo}</td>
-									<td>{servico.descricao}</td>
-									<td>{servico.tipo_servico.value}</td>
-									<td>{servico.telefone}</td>
+							{services.map((service: Servico) => (
+								<tr key={service.id}>
+									<td>{service.titulo}</td>
+									<td>{service.descricao}</td>
+									<td>{service.tipo_servico.value}</td>
+									<td>{service.telefone}</td>
 									<td>
-										<Link to={`/cadastro/${servico.id}`}>
+										<Link to={`/cadastro/${service.id}`}>
 											<FiEdit size={20} />
 										</Link>
-										<a href="/" onClick={() => handleDelete(servico.id)}>
+										<a href="/" onClick={() => handleDelete(service.id)}>
 											<FiTrash2 size={20} />
 										</a>
 									</td>

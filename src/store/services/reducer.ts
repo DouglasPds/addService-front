@@ -6,7 +6,7 @@ const INITIAL_STATE = {
 	error: false,
 };
 
-export function servicos(
+export function services(
 	state = INITIAL_STATE,
 	action: { type: string; payload: [] },
 ) {
