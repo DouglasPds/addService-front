@@ -9,7 +9,7 @@ const Header: React.FC = () => {
 		<HeaderContainer>
 			<h1>AddService</h1>
 			<div>
-				<Link to="/cadastro">
+				<Link to="/login">
 					<button type="button">Entrar</button>
 				</Link>
 				<button type="button">Anunciar</button>

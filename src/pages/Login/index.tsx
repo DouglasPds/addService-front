@@ -15,12 +15,14 @@ const CreateUser: React.FC = () => {
 	const formRef = useRef<FormHandles>(null);
 
 	const handleSubmit = useCallback(
-		(data: any, { reset }) => {
-			addUser(data);
-			history.push('/');
-			reset();
-		},
-		[addUser, history],
+		() => console.log('loguei'),
+		// (data: any, { reset }) => {
+		// 	addUser(data);
+		// 	history.push('/');
+		// 	reset();
+		// },
+		// [addUser, history],
+		[],
 	);
 
 	return (
@@ -29,17 +31,15 @@ const CreateUser: React.FC = () => {
 				<h1>AddService</h1>
 			</Link>
 			<Form ref={formRef} onSubmit={handleSubmit}>
-				<label>Nome</label>
-				<Input name="nome" />
 				<label>E-mail</label>
 				<Input name="e-mail" />
 				<label>Senha</label>
 				<Input name="senha" />
-				<button type="submit">Cadastre-se</button>
+				<button type="submit">Entrar</button>
 			</Form>
 			<div>
-				<p>Já tem uma conta?</p>
-				<Link to="/login">Entrar</Link>
+				<p>Não tem uma conta?</p>
+				<Link to="/cadastro">Cadastre-se</Link>
 			</div>
 		</Container>
 	);
