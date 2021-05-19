@@ -20,11 +20,16 @@ const MyServices: React.FC = () => {
 		}
 	}, [fetchMyServices, idUser]);
 
+	useEffect(() => {
+		// eslint-disable-next-line no-unused-expressions
+		myService;
+	}, [myService]);
+
 	return (
 		<>
 			<Header />
 			<Container>
-				<Title>Lista dos serviços</Title>
+				<Title>Meus anúncios</Title>
 
 				<TableContainer>
 					<table>
@@ -49,7 +54,10 @@ const MyServices: React.FC = () => {
 										<Link to={`/servico/${service.id}`}>
 											<FiEdit size={20} />
 										</Link>
-										<a href="/" onClick={() => handleDelete(service.id)}>
+										<a
+											href="meus-servicos"
+											onClick={() => handleDelete(service.id)}
+										>
 											<FiTrash2 size={20} />
 										</a>
 									</td>
@@ -60,7 +68,7 @@ const MyServices: React.FC = () => {
 				</TableContainer>
 
 				<Link to="/servico">
-					<Button type="button">Novo Serviço</Button>
+					<Button type="button">Novo Anúncio</Button>
 				</Link>
 			</Container>
 		</>

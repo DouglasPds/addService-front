@@ -8,5 +8,5 @@ export interface Servico {
 	};
 	userId: string;
 	fotos?: string;
-	telefone?: string;
+	telefone: string;
 }

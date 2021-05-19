@@ -3,6 +3,7 @@ import React, { useCallback, useRef, useEffect, useState } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useHistory, useParams } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import Header from 'components/Header';
 import Input from 'components/Input';
@@ -12,6 +13,7 @@ import tipoServico from 'enum/tipoServico';
 import { useAuth } from 'hooks/useAuth';
 import { useServices } from 'hooks/useServices';
 import { Servico } from 'interfaces/services.interface';
+import getValidationErrors from 'utils/getValidationErrors';
 
 import { Container, Button, Title, Label } from './styles';
 
@@ -52,15 +54,38 @@ const CreateService: React.FC = () => {
 	}, [servico]);
 
 	const handleSubmit = useCallback(
-		(data: Servico, { reset }) => {
-			if (id) {
-				handleUpdate(id, data);
-			} else {
-				data.userId = idUser!.sub;
-				addService(data);
+		async (data: Servico, { reset }) => {
+			try {
+				formRef.current?.setErrors({});
+
+				const schema = Yup.object().shape({
+					titulo: Yup.string().required('Título obrigatório'),
+					descricao: Yup.string().required('Descrição obrigatória'),
+					tipo_servico: Yup.object()
+						.nullable()
+						.shape({
+							label: Yup.string().required('Tipo do serviço obrigatório'),
+							value: Yup.string().required(),
+						}),
+					telefone: Yup.string().required('Telefone obrigatório'),
+				});
+
+				await schema.validate(data, {
+					abortEarly: false,
+				});
+
+				if (id) {
+					handleUpdate(id, data);
+				} else {
+					data.userId = idUser!.sub;
+					addService(data);
+				}
+				history.push('/');
+				reset();
+			} catch (err) {
+				const errors = getValidationErrors(err);
+				formRef.current?.setErrors(errors);
 			}
-			history.push('/');
-			reset();
 		},
 		[addService, history, handleUpdate, id, idUser],
 	);
@@ -69,7 +94,7 @@ const CreateService: React.FC = () => {
 		<>
 			<Header />
 			<Container>
-				<Title>Criar Serviço</Title>
+				<Title>Criar Anúncio</Title>
 				<Form id="form" ref={formRef} onSubmit={handleSubmit}>
 					<Label htmlFor="titulo">Título</Label>
 					<Input name="titulo" id="titulo" placeholder="Título" />

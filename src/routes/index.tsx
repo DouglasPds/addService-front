@@ -7,6 +7,7 @@ import CreateUser from 'pages/CreateUser';
 import ListServices from 'pages/ListServices';
 import Login from 'pages/Login';
 import MyServices from 'pages/MyServices';
+import ServiceDetail from 'pages/ServiceDetail';
 
 const Routes: React.FC = () => (
 	<Switch>
@@ -14,6 +15,7 @@ const Routes: React.FC = () => (
 		<Route path="/servico/:id" component={CreateService} />
 		<Route path="/servico" component={CreateService} />
 		<Route path="/meus-servicos" component={MyServices} />
+		<Route path="/detalhes/:id" component={ServiceDetail} />
 		<Route path="/cadastro" component={CreateUser} />
 		<Route path="/login" component={Login} />
 	</Switch>

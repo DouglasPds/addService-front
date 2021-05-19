@@ -1,5 +1,7 @@
 import React, { useEffect } from 'react';
 
+import { Link } from 'react-router-dom';
+
 import Header from 'components/Header';
 import { useServices } from 'hooks/useServices';
 import { Servico } from 'interfaces/services.interface';
@@ -17,7 +19,7 @@ const ListServices: React.FC = () => {
 		<>
 			<Header />
 			<Container>
-				<Title>Lista dos serviços</Title>
+				<Title>Anúncios</Title>
 
 				<TableContainer>
 					<table>
@@ -27,6 +29,7 @@ const ListServices: React.FC = () => {
 								<th>Descrição</th>
 								<th>Tipo Serviço</th>
 								<th>Telefone</th>
+								<th>Detalhes</th>
 							</tr>
 						</thead>
 
@@ -37,6 +40,9 @@ const ListServices: React.FC = () => {
 									<td>{service.descricao}</td>
 									<td>{service.tipo_servico?.value}</td>
 									<td>{service.telefone}</td>
+									<td>
+										<Link to={`detalhes/${service.id}`}>Detalhes</Link>
+									</td>
 								</tr>
 							))}
 						</tbody>

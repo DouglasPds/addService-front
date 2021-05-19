@@ -1,35 +1,35 @@
 {
   "servicos": [
     {
-      "titulo": "aaa",
-      "descricao": "aaa",
+      "titulo": "Manutenção de computadores e notebooks",
+      "descricao": "Limpeza, formatação, troca de peças",
       "tipo_servico": {
-        "value": "Outros",
-        "label": "Outros"
+        "value": "Informática",
+        "label": "Informática"
       },
-      "telefone": "aaa",
+      "telefone": "62 94657-2837",
       "userId": "1",
       "id": "5t0EsyT"
     },
     {
-      "titulo": "dd",
-      "descricao": "ddd",
+      "titulo": "Faço tradução de documentos",
+      "descricao": "Verificação ortográfica",
       "tipo_servico": {
-        "value": "Eventos/Festas",
-        "label": "Eventos/Festas"
+        "value": "Tradução",
+        "label": "Tradução"
       },
-      "telefone": "234",
+      "telefone": "62 94628-4837",
       "userId": "1",
       "id": "DvusI7I"
     },
     {
-      "titulo": "bbbb",
-      "descricao": "bbbb",
+      "titulo": "Manutenção de celulares",
+      "descricao": "Troca de bateria, tela, peças em geral e limpeza",
       "tipo_servico": {
-        "value": "Babá",
-        "label": "Babá"
+        "value": "Profissionais liberais",
+        "label": "Profissionais liberais"
       },
-      "telefone": "1111",
+      "telefone": "61 92109-5647",
       "userId": "2",
       "id": "hCW3uBX"
     }

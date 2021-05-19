@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 
@@ -8,6 +8,11 @@ import { HeaderContainer } from './styles';
 
 const Header: React.FC = () => {
 	const { success } = useAuth();
+	const [sign, setSign] = useState(success);
+
+	const handleSingOut = useCallback(() => {
+		setSign(false);
+	}, []);
 
 	return (
 		<HeaderContainer>
@@ -15,12 +20,14 @@ const Header: React.FC = () => {
 				<h1>AddService</h1>
 			</Link>
 			<div>
-				{success ? (
+				{sign ? (
 					<>
 						<Link to="meus-servicos">
-							<button type="button">Meus Serviços</button>
+							<button type="button">Meus Anúncios</button>
 						</Link>
-						<button type="button">Sair</button>
+						<button type="button" onClick={handleSingOut}>
+							<a href="/">Sair</a>
+						</button>
 						<Link to="servico">
 							<button type="button">Anunciar</button>
 						</Link>

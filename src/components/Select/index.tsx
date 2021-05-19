@@ -9,7 +9,7 @@ interface SelectProps extends Props<OptionTypeBase> {
 
 const Select: React.FC<SelectProps> = ({ name, ...rest }) => {
 	const selectRef = useRef(null);
-	const { fieldName, registerField } = useField(name);
+	const { fieldName, registerField, error } = useField(name);
 
 	useEffect(() => {
 		registerField({
@@ -19,7 +19,12 @@ const Select: React.FC<SelectProps> = ({ name, ...rest }) => {
 		});
 	}, [fieldName, registerField, rest.isMulti]);
 
-	return <ReactSelect ref={selectRef} {...rest} />;
+	return (
+		<>
+			<ReactSelect ref={selectRef} {...rest} />
+			<span style={{ color: 'red' }}>{error}</span>
+		</>
+	);
 };
 
 export default Select;

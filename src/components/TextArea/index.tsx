@@ -2,7 +2,7 @@ import React, { TextareaHTMLAttributes, useEffect, useRef } from 'react';
 
 import { useField } from '@unform/core';
 
-import { Textarea } from './styles';
+import { Container } from './styles';
 
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 	name: string;
@@ -10,7 +10,7 @@ interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {
 
 const TextArea: React.FC<TextAreaProps> = ({ name, ...rest }) => {
 	const textAreaRef = useRef(null);
-	const { fieldName, registerField } = useField(name);
+	const { fieldName, registerField, error } = useField(name);
 
 	useEffect(() => {
 		registerField({
@@ -20,7 +20,14 @@ const TextArea: React.FC<TextAreaProps> = ({ name, ...rest }) => {
 		});
 	}, [fieldName, registerField]);
 
-	return <Textarea rows={3} ref={textAreaRef} {...rest} />;
+	return (
+		<>
+			<Container>
+				<textarea rows={3} ref={textAreaRef} {...rest} />
+				<span>{error}</span>
+			</Container>
+		</>
+	);
 };
 
 export default TextArea;
