@@ -33,16 +33,10 @@
   ],
   "users": [
     {
-      "nome": "aa",
-      "e-mail": "aa",
-      "senha": "aa",
-      "id": 1
-    },
-    {
+      "email": "douglas@email.com",
+      "password": "$2a$10$7dmjN2xgAhFSZQ5EdWwvXu6au0uHoa2yfxFO9zbDc9VykWRpJVPVK",
       "nome": "Douglas",
-      "e-mail": "douglas@email.com",
-      "senha": "naruto",
-      "id": 2
+      "id": 1
     }
   ]
 }

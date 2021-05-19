@@ -1,28 +1,50 @@
-import React, { useCallback, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import Input from 'components/Input';
-import { useUsers } from 'hooks/useUsers';
+import { useAuth } from 'hooks/useAuth';
+import getValidationErrors from 'utils/getValidationErrors';
 
 import { Container } from './styles';
 
 const CreateUser: React.FC = () => {
-	const { addUser } = useUsers();
+	const { signIn, success } = useAuth();
 	const history = useHistory();
 	const formRef = useRef<FormHandles>(null);
 
+	useEffect(() => {
+		if (success) {
+			history.push('/');
+		}
+	}, [history, success]);
+
 	const handleSubmit = useCallback(
-		() => console.log('loguei'),
-		// (data: any, { reset }) => {
-		// 	addUser(data);
-		// 	history.push('/');
-		// 	reset();
-		// },
-		// [addUser, history],
-		[],
+		async (data: any) => {
+			try {
+				formRef.current?.setErrors({});
+
+				const schema = Yup.object().shape({
+					email: Yup.string()
+						.required('E-mail obrigatório')
+						.email('Digite um e-mail válido'),
+					password: Yup.string().required('Senha obrigatória'),
+				});
+
+				await schema.validate(data, {
+					abortEarly: false,
+				});
+
+				signIn(data);
+			} catch (err) {
+				const errors = getValidationErrors(err);
+				formRef.current?.setErrors(errors);
+			}
+		},
+		[signIn],
 	);
 
 	return (
@@ -32,9 +54,9 @@ const CreateUser: React.FC = () => {
 			</Link>
 			<Form ref={formRef} onSubmit={handleSubmit}>
 				<label>E-mail</label>
-				<Input name="e-mail" />
+				<Input type="email" name="email" />
 				<label>Senha</label>
-				<Input name="senha" />
+				<Input type="password" name="password" />
 				<button type="submit">Entrar</button>
 			</Form>
 			<div>

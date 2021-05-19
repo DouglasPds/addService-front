@@ -28,11 +28,7 @@ export const Container = styled.div`
 `;
 
 export const Label = styled.label`
-	margin-bottom: 15px;
-
-	&:last-of-type {
-		margin-top: 20px;
-	}
+	margin: 15px 0;
 `;
 
 export const Title = styled.h1`
@@ -45,6 +41,7 @@ export const Title = styled.h1`
 `;
 
 export const Button = styled.button`
+	margin-top: 20px;
 	border: none;
 	color: white;
 	padding: 12px 24px;

@@ -3,9 +3,11 @@ import React, { useCallback, useRef } from 'react';
 import { FormHandles } from '@unform/core';
 import { Form } from '@unform/web';
 import { Link, useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import Input from 'components/Input';
 import { useUsers } from 'hooks/useUsers';
+import getValidationErrors from 'utils/getValidationErrors';
 
 import { Container } from './styles';
 
@@ -15,10 +17,29 @@ const CreateUser: React.FC = () => {
 	const formRef = useRef<FormHandles>(null);
 
 	const handleSubmit = useCallback(
-		(data: any, { reset }) => {
-			addUser(data);
-			history.push('/');
-			reset();
+		async (data: any, { reset }) => {
+			try {
+				formRef.current?.setErrors({});
+
+				const schema = Yup.object().shape({
+					nome: Yup.string().required('Nome obrigatório'),
+					email: Yup.string()
+						.required('E-mail obrigatório')
+						.email('Digite um e-mail válido'),
+					password: Yup.string().required('Senha obrigatória'),
+				});
+
+				await schema.validate(data, {
+					abortEarly: false,
+				});
+
+				addUser(data);
+				history.push('/');
+				reset();
+			} catch (err) {
+				const errors = getValidationErrors(err);
+				formRef.current?.setErrors(errors);
+			}
 		},
 		[addUser, history],
 	);
@@ -32,9 +53,9 @@ const CreateUser: React.FC = () => {
 				<label>Nome</label>
 				<Input name="nome" />
 				<label>E-mail</label>
-				<Input name="e-mail" />
+				<Input type="email" name="email" />
 				<label>Senha</label>
-				<Input name="senha" />
+				<Input type="password" name="password" />
 				<button type="submit">Cadastre-se</button>
 			</Form>
 			<div>

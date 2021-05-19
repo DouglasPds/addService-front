@@ -19,10 +19,11 @@ export const Container = styled.div`
 		flex-direction: column;
 
 		label {
-			margin-bottom: 15px;
+			margin: 15px 0;
 		}
 
 		button {
+			margin-top: 20px;
 			border: none;
 			background: #157347;
 			color: white;
