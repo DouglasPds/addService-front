@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 
 import { auth } from './login/reducer';
 import rootSagaLogin from './login/sagas';
-import { services, service } from './services/reducer';
+import { services, service, myServices } from './services/reducer';
 import rootSagaServices from './services/sagas';
 import rootSagaUsers from './users/sagas';
 
@@ -12,6 +12,7 @@ const sagaMiddleware = createSagaMiddleware();
 const rootReducers = combineReducers({
 	services,
 	service,
+	myServices,
 	auth,
 });
 

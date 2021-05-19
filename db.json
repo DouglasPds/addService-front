@@ -21,6 +21,17 @@
       "telefone": "234",
       "userId": "1",
       "id": "DvusI7I"
+    },
+    {
+      "titulo": "bbbb",
+      "descricao": "bbbb",
+      "tipo_servico": {
+        "value": "Babá",
+        "label": "Babá"
+      },
+      "telefone": "1111",
+      "userId": "2",
+      "id": "hCW3uBX"
     }
   ],
   "users": [
@@ -29,6 +40,12 @@
       "password": "$2a$10$7dmjN2xgAhFSZQ5EdWwvXu6au0uHoa2yfxFO9zbDc9VykWRpJVPVK",
       "nome": "Douglas",
       "id": 1
+    },
+    {
+      "email": "bruno@email.com",
+      "password": "$2a$10$j5rOGBwwxygcgBLYlpyf/.TrpHulAmkOfJfzkhIPJIa8Cq8ZB3P1q",
+      "nome": "Bruno",
+      "id": 2
     }
   ]
 }

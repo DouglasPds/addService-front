@@ -16,6 +16,18 @@ export const Title = styled.h1`
 	margin: 20px 0 40px 0;
 `;
 
+export const Button = styled.button`
+	background-color: #0b5ed7;
+	border: none;
+	color: white;
+	padding: 12px 24px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
+	border-radius: 5px;
+`;
+
 export const TableContainer = styled.section`
 	margin-top: 64px;
 

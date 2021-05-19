@@ -81,3 +81,22 @@ export function service(
 			return state;
 	}
 }
+
+const INITIAL = {
+	props: [],
+	loading: false,
+	error: false,
+};
+
+export function myServices(
+	state = INITIAL,
+	action: { type: string; payload: any },
+) {
+	switch (action.type) {
+		case types.REQUEST_MY_SERVICES_SUCCESS:
+			return { props: action.payload, loading: false, error: false };
+
+		default:
+			return state;
+	}
+}

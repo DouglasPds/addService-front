@@ -6,19 +6,26 @@ import { Servico } from 'interfaces/services.interface';
 import {
 	requestServices,
 	requestService,
+	requestMyServices,
 	deleteService,
 	createService,
 	updateService,
 } from 'store/services/actions';
-import { listServices, listService } from 'store/services/selectors';
+import {
+	listServices,
+	listService,
+	myServices,
+} from 'store/services/selectors';
 
 interface UseServicesProps {
 	services: Servico[];
 	service: Servico;
+	myService: Servico[];
 	loading: boolean;
 	error: boolean;
 	fetchServices(): void;
 	fetchService(id: string): void;
+	fetchMyServices(id: string): void;
 	handleDelete(id: string): void;
 	addService(value: Servico): void;
 	handleUpdate(id: string, value: Servico): void;
@@ -27,6 +34,7 @@ interface UseServicesProps {
 export const useServices = (): UseServicesProps => {
 	const { data, loading, error } = useSelector(listServices);
 	const { state } = useSelector(listService);
+	const { props } = useSelector(myServices);
 
 	const dispatch = useDispatch();
 
@@ -37,6 +45,13 @@ export const useServices = (): UseServicesProps => {
 	const fetchService = useCallback(
 		id => {
 			dispatch(requestService(id));
+		},
+		[dispatch],
+	);
+
+	const fetchMyServices = useCallback(
+		id => {
+			dispatch(requestMyServices(id));
 		},
 		[dispatch],
 	);
@@ -65,10 +80,12 @@ export const useServices = (): UseServicesProps => {
 	return {
 		services: data,
 		service: state,
+		myService: props,
 		loading,
 		error,
 		fetchServices,
 		fetchService,
+		fetchMyServices,
 		handleDelete,
 		addService,
 		handleUpdate,

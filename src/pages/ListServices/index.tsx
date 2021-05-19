@@ -1,16 +1,13 @@
 import React, { useEffect } from 'react';
 
-import { FiEdit, FiTrash2 } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
-
 import Header from 'components/Header';
 import { useServices } from 'hooks/useServices';
 import { Servico } from 'interfaces/services.interface';
 
-import { Container, TableContainer, Button, Title } from './styles';
+import { Container, TableContainer, Title } from './styles';
 
 const ListServices: React.FC = () => {
-	const { fetchServices, services, handleDelete } = useServices();
+	const { fetchServices, services } = useServices();
 
 	useEffect(() => {
 		fetchServices();
@@ -30,7 +27,6 @@ const ListServices: React.FC = () => {
 								<th>Descrição</th>
 								<th>Tipo Serviço</th>
 								<th>Telefone</th>
-								<th>Ações</th>
 							</tr>
 						</thead>
 
@@ -41,23 +37,11 @@ const ListServices: React.FC = () => {
 									<td>{service.descricao}</td>
 									<td>{service.tipo_servico?.value}</td>
 									<td>{service.telefone}</td>
-									<td>
-										<Link to={`/servico/${service.id}`}>
-											<FiEdit size={20} />
-										</Link>
-										<a href="/" onClick={() => handleDelete(service.id)}>
-											<FiTrash2 size={20} />
-										</a>
-									</td>
 								</tr>
 							))}
 						</tbody>
 					</table>
 				</TableContainer>
-
-				<Link to="/servico">
-					<Button type="button">Novo Serviço</Button>
-				</Link>
 			</Container>
 		</>
 	);

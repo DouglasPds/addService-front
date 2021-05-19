@@ -3,6 +3,7 @@ import { all, takeEvery, put } from 'redux-saga/effects';
 import {
 	getServices,
 	getService,
+	getMyServices,
 	deleteService,
 	createService,
 	updateService,
@@ -28,6 +29,15 @@ function* requestService(value: any): any {
 	yield put({
 		type: types.REQUEST_SERVICE_SUCCESS,
 		payload: service,
+	});
+}
+
+function* requestMyServices(value: any): any {
+	const { id } = value;
+	const myServices = yield getMyServices(id);
+	yield put({
+		type: types.REQUEST_MY_SERVICES_SUCCESS,
+		payload: myServices,
 	});
 }
 
@@ -65,6 +75,7 @@ export default function* rootSaga() {
 	yield all([
 		takeEvery(types.REQUEST_SERVICES, requestServices),
 		takeEvery(types.REQUEST_SERVICE, requestService),
+		takeEvery(types.REQUEST_MY_SERVICES, requestMyServices),
 		takeEvery(types.DELETE_SERVICE, handleDelete),
 		takeEvery(types.CREATE_SERVICE, addService),
 		takeEvery(types.UPDATE_SERVICE, handleUpdate),

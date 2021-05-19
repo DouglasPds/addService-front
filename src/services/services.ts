@@ -12,6 +12,11 @@ export const getService = async (id: string): Promise<Servico> => {
 	return response.data;
 };
 
+export const getMyServices = async (id: string) => {
+	const response = await api.get(`servicos?userId=${id}`);
+	return response.data;
+};
+
 export const deleteService = async (id: string): Promise<void> => {
 	await api.delete(`servicos/${id}`);
 };

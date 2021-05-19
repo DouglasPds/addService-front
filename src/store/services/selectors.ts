@@ -6,8 +6,18 @@ interface ServiceProps {
 	error: boolean;
 }
 
+interface MyServiceProps {
+	props: Servico[];
+	loading: boolean;
+	error: boolean;
+}
+
 interface StateProps {
 	services: ServiceProps;
+}
+
+interface MyStateProps {
+	myServices: MyServiceProps;
 }
 
 interface State {
@@ -20,3 +30,6 @@ interface StateData {
 export const listServices = (state: StateProps): ServiceProps => state.services;
 
 export const listService = (state: StateData): State => state.service;
+
+export const myServices = (state: MyStateProps): MyServiceProps =>
+	state.myServices;

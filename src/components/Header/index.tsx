@@ -11,12 +11,17 @@ const Header: React.FC = () => {
 
 	return (
 		<HeaderContainer>
-			<h1>AddService</h1>
+			<Link to="/">
+				<h1>AddService</h1>
+			</Link>
 			<div>
 				{success ? (
 					<>
+						<Link to="meus-servicos">
+							<button type="button">Meus Serviços</button>
+						</Link>
 						<button type="button">Sair</button>
-						<Link to="cadastro">
+						<Link to="servico">
 							<button type="button">Anunciar</button>
 						</Link>
 					</>
