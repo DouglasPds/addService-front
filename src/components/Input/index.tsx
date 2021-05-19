@@ -24,7 +24,7 @@ const Input: React.FC<InputProps> = ({ name, ...rest }) => {
 		<>
 			<Container>
 				<input ref={inputRef} {...rest} />
-				{error}
+				<span>{error}</span>
 			</Container>
 		</>
 	);

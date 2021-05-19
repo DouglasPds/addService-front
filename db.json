@@ -1,34 +1,26 @@
 {
   "servicos": [
     {
-      "titulo": "Monta pc da nasa topzera",
-      "descricao": "Todo tipo de peças",
+      "titulo": "aaa",
+      "descricao": "aaa",
       "tipo_servico": {
-        "value": "Informática",
-        "label": "Informática"
+        "value": "Outros",
+        "label": "Outros"
       },
-      "telefone": "75839764938",
-      "id": "EQFaawh"
+      "telefone": "aaa",
+      "userId": "1",
+      "id": "5t0EsyT"
     },
     {
-      "titulo": "Sobe parede top top memo",
-      "descricao": "confia",
+      "titulo": "dd",
+      "descricao": "ddd",
       "tipo_servico": {
-        "value": "Reparação/Conserto/Reforma",
-        "label": "Reparação/Conserto/Reforma"
+        "value": "Eventos/Festas",
+        "label": "Eventos/Festas"
       },
-      "telefone": "3241233442",
-      "id": "JjeGTrH"
-    },
-    {
-      "titulo": "hhtyaaaaa",
-      "descricao": "lul",
-      "tipo_servico": {
-        "value": "Serviços domésticos",
-        "label": "Serviços domésticos"
-      },
-      "telefone": "a",
-      "id": "sYDaIzh"
+      "telefone": "234",
+      "userId": "1",
+      "id": "DvusI7I"
     }
   ],
   "users": [

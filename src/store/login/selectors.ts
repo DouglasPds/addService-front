@@ -1,5 +1,7 @@
 interface AuthProps {
-	token: string;
+	token: {
+		accessToken: string;
+	};
 	loading: boolean;
 	success: boolean;
 }

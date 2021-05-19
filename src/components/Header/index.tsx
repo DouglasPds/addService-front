@@ -16,7 +16,9 @@ const Header: React.FC = () => {
 				{success ? (
 					<>
 						<button type="button">Sair</button>
-						<button type="button">Anunciar</button>
+						<Link to="cadastro">
+							<button type="button">Anunciar</button>
+						</Link>
 					</>
 				) : (
 					<Link to="/login">

@@ -14,4 +14,8 @@ export const Container = styled.div`
 			color: #666360;
 		}
 	}
+
+	span {
+		color: #e01a1a;
+	}
 `;

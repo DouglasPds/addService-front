@@ -6,6 +6,7 @@ export interface Servico {
 		value: string;
 		label: string;
 	};
+	userId: string;
 	fotos?: string;
 	telefone?: string;
 }

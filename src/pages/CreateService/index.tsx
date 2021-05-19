@@ -9,6 +9,7 @@ import Input from 'components/Input';
 import AsyncSelect from 'components/Select';
 import TextArea from 'components/TextArea';
 import tipoServico from 'enum/tipoServico';
+import { useAuth } from 'hooks/useAuth';
 import { useServices } from 'hooks/useServices';
 import { Servico } from 'interfaces/services.interface';
 
@@ -24,6 +25,7 @@ const CreateService: React.FC = () => {
 	const [servico, setServico] = useState<Servico>();
 	const formRef = useRef<FormHandles>(null);
 	const { addService, handleUpdate, fetchService, service } = useServices();
+	const { idUser } = useAuth();
 
 	useEffect(() => {
 		if (id) {
@@ -54,12 +56,13 @@ const CreateService: React.FC = () => {
 			if (id) {
 				handleUpdate(id, data);
 			} else {
+				data.userId = idUser!.sub;
 				addService(data);
 			}
 			history.push('/');
 			reset();
 		},
-		[addService, history, handleUpdate, id],
+		[addService, history, handleUpdate, id, idUser],
 	);
 
 	return (
